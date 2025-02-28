@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 
 class FirebaseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -9,6 +10,9 @@ class FirebaseService {
       "task": task,
       "createdAt": FieldValue.serverTimestamp(),
     });
+
+     // Send a push notification
+    // _sendPushNotification(task);
   }
 
   Future<void> updateTask(String taskId, String newTask) async {
@@ -35,4 +39,19 @@ class FirebaseService {
       }).toList();
     });
   }
+
+
+
+  // Future<void> _sendPushNotification(String task) async {
+  //   try {
+  //     await FirebaseMessaging.instance.subscribeToTopic("tasks");
+  //     await FirebaseFirestore.instance.collection("notifications").add({
+  //       "title": "New Task Added",
+  //       "body": task,
+  //       "timestamp": FieldValue.serverTimestamp(),
+  //     });
+  //   } catch (e) {
+  //     print("Error sending notification: $e");
+  //   }
+  // }
 }
