@@ -13,14 +13,14 @@ class SigninController extends GetxController {
   final passwordNotifier = ValueNotifier(false);
   var isLoading = false.obs;
 
-  // 🔹 Login Function
+  // ++++++++++++++++++++++++++++++++ Login Function +++++++++++++++++++++++++++++++++
+  
   Future<void> login() async {
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
       Get.snackbar("Error", "Email and Password cannot be empty",
           snackPosition: SnackPosition.BOTTOM);
       return;
     }
-
     try {
       isLoading.value = true;
       UserModel? user = await _authRepository.signIn(
