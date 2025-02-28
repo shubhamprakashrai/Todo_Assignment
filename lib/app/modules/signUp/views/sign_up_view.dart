@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:todo_assignment/app/uiUtils/custom_btn.dart';
 import 'package:todo_assignment/app/uiUtils/custom_textfiled.dart';
-import 'package:todo_assignment/app/uiUtils/google_btn.dart';
-import 'package:todo_assignment/app/utils/app_colors.dart';
 import '../controllers/sign_up_controller.dart';
+
 
 class SignUpView extends GetView<SignUpController> {
   const SignUpView({super.key});
@@ -22,92 +20,68 @@ class SignUpView extends GetView<SignUpController> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              // Title and subtitle
               Column(
                 children: <Widget>[
                   const SizedBox(height: 60.0),
-                  const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  const Text("Sign Up",
+                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 20),
-                  Text(
-                    "Create your account",
-                    style: TextStyle(fontSize: 15, color: Colors.grey[700]),
-                  )
+                  Text("Create your account",
+                      style: TextStyle(fontSize: 15, color: Colors.grey[700])),
                 ],
               ),
 
-              // Form fields with validation
               Column(
                 children: [
                   const SizedBox(height: 20),
                   Obx(() => CustomTextField(
-                    controller: controller.emailController,
-                    hintText: "Email",
-                    errorText: controller.emailError.value.isNotEmpty ? controller.emailError.value : null,
-                    prefixIcon: const Icon(Icons.email),
-                  )),
+                        controller: controller.emailController,
+                        hintText: "Email",
+                        errorText: controller.emailError.value.isNotEmpty
+                            ? controller.emailError.value
+                            : null,
+                        prefixIcon: const Icon(Icons.email),
+                      )),
                   const SizedBox(height: 20),
                   Obx(() => CustomTextField(
-                    controller: controller.passwordController,
-                    hintText: "Password",
-                    errorText: controller.passwordError.value.isNotEmpty ? controller.passwordError.value : null,
-                    prefixIcon: const Icon(Icons.lock_outline),
-                    obscureText: true,
-                  )),
+                        controller: controller.passwordController,
+                        hintText: "Password",
+                        errorText: controller.passwordError.value.isNotEmpty
+                            ? controller.passwordError.value
+                            : null,
+                        prefixIcon: const Icon(Icons.lock_outline),
+                        obscureText: true,
+                      )),
                   const SizedBox(height: 20),
                   Obx(() => CustomTextField(
-                    controller: controller.confirmPasswordController,
-                    hintText: "Confirm Password",
-                    errorText: controller.confirmPasswordError.value?.isNotEmpty ?? true? controller.confirmPasswordError.value : null,
-                    prefixIcon: const Icon(Icons.lock_outline),
-                    obscureText: true,
-                    
-                  )),
+                        controller: controller.confirmPasswordController,
+                        hintText: "Confirm Password",
+                        errorText: controller.confirmPasswordError.value,
+                        prefixIcon: const Icon(Icons.lock_outline),
+                        obscureText: true,
+                      )),
                 ],
               ),
 
-
-              // Signup Button
-              Container(
-                  padding: const EdgeInsets.only(top: 3, left: 3),
-                  child:Obx(() => CustomLoadingButton(
-                    text: "SignUp",
+              Obx(() => CustomLoadingButton(
+                    text: "Sign Up",
                     isLoading: controller.isLoading.value,
-                    onPressed: (){
-                      
-                    },
-                  ))
-              
-              ),
+                    onPressed: controller.signUp,
+                  )),
 
-              const Center(child: Text( "Or")),
+              const Center(child: Text("Or")),
 
-              // Sign In with Google Button
-              SignInButtonGoogle(
-                label: "Sign In with Google",
-                onPressed: () async {
-                  // await GoogleAuthService.signInWithGoogle();
-                },
-              ),
-
-              // Already have an account? Login
+              // Navigate to Login Page
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text( "Already have an account ?"),
+                  const Text("Already have an account? "),
                   TextButton(
                       onPressed: () {
                         Get.toNamed("/signin");
                       },
-                      child: const Text(
-                       "Login",
-                        style: TextStyle(color: AppColors.purpleColors),
-                      ))
+                      child: const Text("Login",
+                          style: TextStyle(color: Colors.purple))),
                 ],
               )
             ],

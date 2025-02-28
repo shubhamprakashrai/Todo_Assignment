@@ -17,50 +17,47 @@ class SigninView extends GetView<SigninController> {
   @override
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-            body: SafeArea(
-              child: Container(
-                margin: const EdgeInsets.all(24),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      _header(context),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      _inputField(context),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _forgotPassword(context),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        width: 180,
-                        child: SignInButtonGoogle(
-                          label: "Sign In With Google",
-                          onPressed: () async {
-                           
-                          Get.off(const  HomePageView(), binding: HomePageBinding());
-                            // await GoogleAuthService.signInWithGoogle();
-                          },
-                        ),
-                      ),
-                      _signup(context),
-                    ],
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          margin: const EdgeInsets.all(24),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                _header(context),
+                const SizedBox(
+                  height: 10,
+                ),
+                _inputField(context),
+                const SizedBox(
+                  height: 20,
+                ),
+                _forgotPassword(context),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: 180,
+                  child: SignInButtonGoogle(
+                    label: "Sign In With Google",
+                    onPressed: () async {
+                      Get.off(const HomePageView(), binding: HomePageBinding());
+                      // await GoogleAuthService.signInWithGoogle();
+                    },
                   ),
                 ),
-              ),
+                _signup(context),
+              ],
             ),
-          );
-       
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _header(BuildContext context) {
@@ -89,22 +86,22 @@ class SigninView extends GetView<SigninController> {
         ),
         const SizedBox(height: 10),
         CustomTextField(
-                controller: ctr.passwordController,
-                hintText: "Password",
-                prefixIcon: GestureDetector(
-                  onTap: () =>
-                      ctr.passwordNotifier.value = !ctr.passwordNotifier.value,
-                  child: const Icon(Icons.lock_open),
-                ),
-                obscureText: ctr.passwordNotifier.value,
-                onFieldSubmitted: (_) => {},
-              ),
+          controller: ctr.passwordController,
+          hintText: "Password",
+          prefixIcon: GestureDetector(
+            onTap: () =>
+                ctr.passwordNotifier.value = !ctr.passwordNotifier.value,
+            child: const Icon(Icons.lock_open),
+          ),
+          obscureText: ctr.passwordNotifier.value,
+          onFieldSubmitted: (_) => {},
+        ),
         const SizedBox(height: 10),
         Obx(() => CustomLoadingButton(
               text: "Login",
-              isLoading:ctr.isLoading.value, 
+              isLoading: controller.isLoading.value,
               onPressed: () {
-                
+                controller.login();
               },
             ))
       ],

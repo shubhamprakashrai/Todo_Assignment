@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "924817519352",
+    "project_id": "fir-notification-12b85",
+    "storage_bucket": "fir-notification-12b85.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924817519352:android:ecc3e97885b5e30c18410d",
+        "android_client_info": {
+          "package_name": "com.todo.todo_assignment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3amZ2bJApPiT62PtRI_7N0CdvDaB69Io"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
