@@ -1,18 +1,32 @@
 import 'package:get/get.dart';
+import 'package:todo_assignment/app/modules/homePage/repostory/firebase_service.dart';
+
 
 class HomePageController extends GetxController {
-  var tasks = <String>[].obs;
+  final FirebaseService _firebaseService = FirebaseService();
+  var tasks = <Map<String, dynamic>>[].obs;
 
-  void addTask(String task) {
-    tasks.add(task);
+  @override
+  void onInit() {
+    super.onInit();
+    fetchTasks();
   }
 
-  void editTask(int index, String newTask) {
-    tasks[index] = newTask;
-    tasks.refresh();
+  void fetchTasks() {
+    _firebaseService.getTasks().listen((taskList) {
+      tasks.assignAll(taskList);
+    });
   }
 
-  void deleteTask(int index) {
-    tasks.removeAt(index);
+  Future<void> addTask(String task) async {
+    await _firebaseService.addTask(task);
+  }
+
+  Future<void> editTask(String taskId, String newTask) async {
+    await _firebaseService.updateTask(taskId, newTask);
+  }
+
+  Future<void> deleteTask(String taskId) async {
+    await _firebaseService.deleteTask(taskId);
   }
 }
