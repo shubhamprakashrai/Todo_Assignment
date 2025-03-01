@@ -49,8 +49,8 @@ class FirebaseService {
 
 
   Future<void> sendPushNotification(String task) async {
-    final String serverKey = "key";
-    final String fcmUrl = "https://fcm.googleapis.com/fcm/send";
+    const String serverKey = "key";
+    const String fcmUrl = "https://fcm.googleapis.com/fcm/send";
 
     final Map<String, dynamic> notificationData = {
       "to": "/topics/tasks",
@@ -78,10 +78,10 @@ class FirebaseService {
       if (response.statusCode == 200) {
         debugPrint("✅ Notification Sent: ${response.body}");
       } else {
-        debugPrint("❌ Failed to send notification: ${response.body}");
+        debugPrint("Failed to send notification: ${response.body}");
       }
     } catch (e) {
-      debugPrint("❌ Error sending notification: $e");
+      debugPrint("Error sending notification: $e");
     }
   }
 
