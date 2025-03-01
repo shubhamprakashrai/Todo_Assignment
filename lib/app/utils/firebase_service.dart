@@ -77,6 +77,9 @@ class NotificationService extends GetxController {
           defaultColor: Colors.blue,
           ledColor: Colors.blue,
           importance: NotificationImportance.High,
+          playSound: true,  // ✅ Enables sound
+          enableLights: true,
+          enableVibration: true, // ✅ Enables vibration
         ),
       ],
     );

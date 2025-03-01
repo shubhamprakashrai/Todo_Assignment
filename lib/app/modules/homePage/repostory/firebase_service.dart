@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 // import 'package:firebase_messaging/firebase_messaging.dart';
 
 class FirebaseService {
@@ -11,8 +16,9 @@ class FirebaseService {
       "createdAt": FieldValue.serverTimestamp(),
     });
 
+
      // Send a push notification
-    // _sendPushNotification(task);
+    await sendPushNotification(task);
   }
 
   Future<void> updateTask(String taskId, String newTask) async {
@@ -42,16 +48,41 @@ class FirebaseService {
 
 
 
-  // Future<void> _sendPushNotification(String task) async {
-  //   try {
-  //     await FirebaseMessaging.instance.subscribeToTopic("tasks");
-  //     await FirebaseFirestore.instance.collection("notifications").add({
-  //       "title": "New Task Added",
-  //       "body": task,
-  //       "timestamp": FieldValue.serverTimestamp(),
-  //     });
-  //   } catch (e) {
-  //     print("Error sending notification: $e");
-  //   }
-  // }
+  Future<void> sendPushNotification(String task) async {
+    final String serverKey = "key";
+    final String fcmUrl = "https://fcm.googleapis.com/fcm/send";
+
+    final Map<String, dynamic> notificationData = {
+      "to": "/topics/tasks",
+      "notification": {
+        "title": "New Task Added",
+        "body": task,
+        "sound": "default"
+      },
+      "data": {
+        "click_action": "FLUTTER_NOTIFICATION_CLICK",
+        "task": task,
+      }
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse(fcmUrl),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "key=$serverKey",
+        },
+        body: jsonEncode(notificationData),
+      );
+
+      if (response.statusCode == 200) {
+        debugPrint("✅ Notification Sent: ${response.body}");
+      } else {
+        debugPrint("❌ Failed to send notification: ${response.body}");
+      }
+    } catch (e) {
+      debugPrint("❌ Error sending notification: $e");
+    }
+  }
+
 }
