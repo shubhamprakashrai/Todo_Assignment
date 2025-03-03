@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class AuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -11,7 +12,7 @@ class AuthRepository {
       );
       return userCredential;
     } catch (e) {
-      print("Sign-Up Error: $e");
+      debugPrint("Sign-Up Error: $e");
       return null;
     }
   }

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo_assignment/app/modules/homePage/bindings/home_page_binding.dart';
-import 'package:todo_assignment/app/modules/homePage/views/home_page_view.dart';
 import 'package:todo_assignment/app/modules/signUp/bindings/sign_up_binding.dart';
 import 'package:todo_assignment/app/modules/signUp/views/sign_up_view.dart';
 import 'package:todo_assignment/app/uiUtils/custom_btn.dart';
 import 'package:todo_assignment/app/uiUtils/custom_textfiled.dart';
-import 'package:todo_assignment/app/uiUtils/google_btn.dart';
 import 'package:todo_assignment/app/utils/app_colors.dart';
 
 import '../controllers/signin_controller.dart';
@@ -37,20 +34,20 @@ class SigninView extends GetView<SigninController> {
                 const SizedBox(
                   height: 20,
                 ),
-                _forgotPassword(context),
+                // _forgotPassword(context),
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(
-                  width: 180,
-                  child: SignInButtonGoogle(
-                    label: "Sign In With Google",
-                    onPressed: () async {
-                      Get.off(const HomePageView(), binding: HomePageBinding());
-                      // await GoogleAuthService.signInWithGoogle();
-                    },
-                  ),
-                ),
+                // SizedBox(
+                //   width: 180,
+                //   child: SignInButtonGoogle(
+                //     label: "Sign In With Google",
+                //     onPressed: () async {
+                //       Get.off(const HomePageView(), binding: HomePageBinding());
+                //       // await GoogleAuthService.signInWithGoogle();
+                //     },
+                //   ),
+                // ),
                 _signup(context),
               ],
             ),
@@ -108,20 +105,20 @@ class SigninView extends GetView<SigninController> {
     );
   }
 
-  Widget _forgotPassword(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        // Get.to(
-        //   () => const ForgetPasswordView(),
-        //   binding: ForgetpasswordBinding(),
-        // );
-      },
-      child: const Text(
-        "Forget Password?",
-        style: TextStyle(color: AppColors.purpleColors),
-      ),
-    );
-  }
+  // Widget _forgotPassword(BuildContext context) {
+  //   return TextButton(
+  //     onPressed: () {
+  //       // Get.to(
+  //       //   () => const ForgetPasswordView(),
+  //       //   binding: ForgetpasswordBinding(),
+  //       // );
+  //     },
+  //     child: const Text(
+  //       "Forget Password?",
+  //       style: TextStyle(color: AppColors.purpleColors),
+  //     ),
+  //   );
+  // }
 
   Widget _signup(BuildContext context) {
     return Row(
@@ -130,7 +127,6 @@ class SigninView extends GetView<SigninController> {
         const Text("Don't have an account?"),
         TextButton(
             onPressed: () {
-              // Navigate to sign up page
               Get.off(const SignUpView(), binding: SignUpBinding());
             },
             child: const Text(

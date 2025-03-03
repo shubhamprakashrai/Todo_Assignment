@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_assignment/app/modules/homePage/bindings/home_page_binding.dart';
 import 'package:todo_assignment/app/modules/signin/models/user_model.dart';
 import 'package:todo_assignment/app/modules/signin/repositry/sign_authRepository.dart';
+import 'package:todo_assignment/app/utils/custom_snackbar.dart';
 import '../../homePage/views/home_page_view.dart';
 
 class SigninController extends GetxController {
@@ -14,11 +15,13 @@ class SigninController extends GetxController {
   var isLoading = false.obs;
 
   // ++++++++++++++++++++++++++++++++ Login Function +++++++++++++++++++++++++++++++++
-  
+
   Future<void> login() async {
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-      Get.snackbar("Error", "Email and Password cannot be empty",
-          snackPosition: SnackPosition.BOTTOM);
+      showCustomSnackBar(title: "Error",
+      message: "Email and Password cannot be empty",
+      isError: true,
+    );
       return;
     }
     try {
@@ -29,11 +32,19 @@ class SigninController extends GetxController {
       );
 
       if (user != null) {
-        Get.offAll(() => const HomePageView(),binding: HomePageBinding());
+        showCustomSnackBar(
+        title: "Success",
+        message: "Login successful!",
+        isError: false,
+      );
+        Get.offAll(() => const HomePageView(), binding: HomePageBinding());
       }
     } catch (e) {
-      Get.snackbar("Login Failed", e.toString(),
-          snackPosition: SnackPosition.BOTTOM);
+      showCustomSnackBar(
+        title: "Login Failed",
+        message: e.toString(),
+        isError: true,
+      );
     } finally {
       isLoading.value = false;
     }

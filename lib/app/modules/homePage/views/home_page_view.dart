@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_assignment/app/uiUtils/custom_textfiled.dart';
+import 'package:todo_assignment/app/utils/Theme/theme_logic_extension/app_theme.dart';
+import 'package:todo_assignment/app/utils/Theme/theme_logic_extension/theme_provider.dart';
 import 'package:todo_assignment/app/utils/app_colors.dart';
 import '../controllers/home_page_controller.dart';
 
@@ -14,6 +16,19 @@ class HomePageView extends GetView<HomePageController> {
         title: const Text('Task Manager'),
         centerTitle: true,
         backgroundColor: AppColors.purpleColors,
+        actions: [
+          ValueListenableBuilder<ThemeData>(
+            valueListenable: ThemeManager().themeNotifier,
+            builder: (context, theme, _) {
+              return Switch(
+                value: theme == AppThemes.darkTheme,
+                onChanged: (value) {
+                  ThemeManager().setTheme(value ? 'dark' : 'light');
+                },
+              );
+            },
+          ),
+        ],
       ),
       body: Obx(
         () => controller.tasks.isEmpty

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-// import 'package:firebase_messaging/firebase_messaging.dart';
+
 
 class FirebaseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -76,7 +76,7 @@ class FirebaseService {
       );
 
       if (response.statusCode == 200) {
-        debugPrint("✅ Notification Sent: ${response.body}");
+        debugPrint("Notification Sent: ${response.body}");
       } else {
         debugPrint("Failed to send notification: ${response.body}");
       }

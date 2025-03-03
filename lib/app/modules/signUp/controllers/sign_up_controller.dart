@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_assignment/app/modules/signUp/repository/sign_up_auth_repository.dart';
+import 'package:todo_assignment/app/utils/custom_snackbar.dart';
 
 
 class SignUpController extends GetxController {
@@ -20,7 +21,6 @@ class SignUpController extends GetxController {
     final password = passwordController.text.trim();
     final confirmPassword = confirmPasswordController.text.trim();
 
-    // Input Validations
     if (email.isEmpty || !email.contains('@')) {
       emailError.value = "Enter a valid email";
       return;
@@ -44,16 +44,17 @@ class SignUpController extends GetxController {
 
     isLoading.value = true;
 
-    // Call the repository to sign up
+
     final userCredential = await _authRepository.signUpWithEmail(email, password);
 
     isLoading.value = false;
 
     if (userCredential != null) {
-      Get.snackbar("Success", "Account created successfully!");
-      Get.offNamed("/home"); // Navigate to Home page
+       showCustomSnackBar(title: "Success", message: "Account created successfully!",isError: false,);
+      Get.offNamed("/home"); 
     } else {
-      Get.snackbar("Error", "Failed to sign up. Try again.");
+        showCustomSnackBar(title: "Error",message: "Failed to sign up. Try again.", isError: true,);
+     
     }
   }
 }

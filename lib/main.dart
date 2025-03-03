@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:todo_assignment/app/utils/Theme/theme_logic_extension/theme_provider.dart';
 
 
 import 'app/routes/app_pages.dart';
@@ -36,20 +37,26 @@ void main() async {
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
     notificationService.handleBackgroundStateNotification(message);
   });
-
+   
+   await ThemeManager().init();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: "GiphyApp",
+    return  ValueListenableBuilder(
+      valueListenable: ThemeManager().themeNotifier, 
+       builder: (context, value, child) {
+         return  GetMaterialApp(
+          theme: value,
+         title: "GiphyApp",
       debugShowCheckedModeBanner: false,
       initialRoute: FirebaseAuth.instance.currentUser == null
           ? Routes.SIGNIN
           : Routes.HOME_PAGE,
       getPages: AppPages.routes,
     );
+       },);
   }
 }

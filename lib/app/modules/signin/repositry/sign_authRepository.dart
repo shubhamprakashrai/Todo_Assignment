@@ -4,7 +4,6 @@ import '../models/user_model.dart';
 class AuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // 🔹 Sign in with Email & Password
   Future<UserModel?> signIn(String email, String password) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
@@ -22,8 +21,8 @@ class AuthRepository {
     }
   }
 
-  //  Sign Out
-  Future<void> signOut() async {
-    await _auth.signOut();
-  }
+  // //  Sign Out
+  // Future<void> signOut() async {
+  //   await _auth.signOut();
+  // }
 }

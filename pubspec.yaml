@@ -44,6 +44,8 @@ dependencies:
   awesome_notifications: ^0.8.2
   firebase_messaging: ^15.0.0
   http:
+  flutter_native_splash: ^2.4.0
+  shared_preferences: ^2.2.3
 
  
 
@@ -57,6 +59,25 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  flutter_launcher_icons: "^0.14.3"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/todo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/images/todo.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/images/todo.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/images/todo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -70,8 +91,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+     - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -99,3 +120,16 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/todo.png
+  branding: assets/images/todo.png
+  color_dark: "#ffffff"
+  image_dark: assets/images/todo.png
+  branding_dark: assets/images/todo.png
+
+  android_12:
+    image: assets/images/todo.png
+    icon_background_color: "#ffffff"
+    image_dark: assets/images/todo.png
+    icon_background_color_dark: "#ffffff"
